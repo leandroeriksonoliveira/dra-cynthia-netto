@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relatório de Conformidade — Dra. Cynthia Netto</title>
+  <style>
+    :root {
+      --bg: #0a0e14;
+      --surface: #111827;
+      --surface2: #1a2235;
+      --border: #243049;
+      --primary: #e8b4b8;
+      --accent: #7c9cbf;
+      --success: #22c55e;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 24px 16px 60px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      font-size: 10px; font-weight: 700; padding: 5px 12px;
+      border-radius: 20px; letter-spacing: 0.6px; text-transform: uppercase;
+    }
+    .pill-cfm { background: rgba(232,180,184,0.12); color: var(--primary); border: 1px solid rgba(232,180,184,0.35); }
+    .pill-lgpd { background: rgba(124,156,191,0.12); color: var(--accent); border: 1px solid rgba(124,156,191,0.3); }
+    .pill-cdc  { background: rgba(34,197,94,0.12); color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+    .btn-print {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, #c97b84, #7c9cbf);
+      color: #fff; border: none; border-radius: 10px;
+      padding: 10px 18px; font-size: 13px; font-weight: 700;
+      cursor: pointer; box-shadow: 0 4px 16px rgba(201,123,132,0.2);
+    }
+    .btn-print:hover { opacity: 0.9; transform: translateY(-1px); }
+    .btn-print svg { width: 18px; height: 18px; }
+    .header {
+      background: linear-gradient(135deg, #0f1218 0%, #1a1520 50%, #0f1218 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 32px;
+      margin-bottom: 24px;
+    }
+    .header h1 { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+    .header h1 em { color: var(--primary); font-style: normal; }
+    .header-sub { font-size: 13px; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+    .header-meta {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
+    }
+    .meta-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+    }
+    .meta-item label {
+      font-size: 10px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 1px;
+      display: block; margin-bottom: 4px;
+    }
+    .meta-item span { font-size: 13px; font-weight: 600; }
+    .scoreboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .score-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px 14px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .score-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; }
+    .score-card.conformes::before { background: var(--success); }
+    .score-card.atencao::before { background: var(--warning); }
+    .score-card.falhas::before { background: var(--danger); }
+    .score-card.criticos::before { background: #dc2626; }
+    .score-num { font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .score-card.conformes .score-num { color: var(--success); }
+    .score-card.atencao .score-num { color: var(--warning); }
+    .score-card.falhas .score-num { color: var(--danger); }
+    .score-card.criticos .score-num { color: #dc2626; }
+    .score-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; }
+    .veredito {
+      background: linear-gradient(135deg, rgba(239,68,68,0.1), rgba(239,68,68,0.04));
+      border: 1px solid rgba(239,68,68,0.35);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .veredito-icon { font-size: 36px; }
+    .veredito-text h2 { font-size: 17px; font-weight: 700; color: #f87171; margin-bottom: 6px; }
+    .veredito-text p { font-size: 13px; color: var(--muted); line-height: 1.6; max-width: 720px; }
+    .section { margin-bottom: 18px; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      padding: 14px 18px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius) var(--radius) 0 0;
+      cursor: pointer;
+    }
+    .section-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: rgba(232,180,184,0.15); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 800;
+    }
+    .section-title { flex: 1; font-size: 14px; font-weight: 600; }
+    .section-body {
+      border: 1px solid var(--border);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      overflow: hidden;
+    }
+    .item {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 12px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(36,48,73,0.6);
+      background: var(--surface);
+      align-items: start;
+    }
+    .item:last-child { border-bottom: none; }
+    .item-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+    .item-desc { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .item-desc strong { color: #cbd5e1; }
+    .item-action {
+      display: inline-block; margin-top: 6px;
+      font-size: 11px; padding: 3px 8px; border-radius: 4px;
+      background: rgba(232,180,184,0.1); border: 1px solid rgba(232,180,184,0.25);
+      color: var(--primary);
+    }
+    .item-badge {
+      font-size: 10px; font-weight: 700;
+      padding: 4px 9px; border-radius: 20px; white-space: nowrap;
+    }
+    .badge-ok { background: rgba(34,197,94,0.12); color: var(--success); border: 1px solid rgba(34,197,94,0.3); }
+    .badge-warn { background: rgba(245,158,11,0.12); color: var(--warning); border: 1px solid rgba(245,158,11,0.3); }
+    .badge-fail { background: rgba(239,68,68,0.12); color: var(--danger); border: 1px solid rgba(239,68,68,0.3); }
+    .badge-critical { background: rgba(220,38,38,0.15); color: #f87171; border: 1px solid rgba(220,38,38,0.4); }
+    .action-plan {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .action-plan-header {
+      padding: 16px 20px;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      font-weight: 700;
+    }
+    .action-group { padding: 18px 20px; border-bottom: 1px solid var(--border); }
+    .action-group:last-child { border-bottom: none; }
+    .action-group-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 12px; }
+    .action-group-title.red { color: #f87171; }
+    .action-group-title.yellow { color: var(--warning); }
+    .action-group-title.green { color: var(--success); }
+    .action-item { display: flex; gap: 12px; margin-bottom: 10px; font-size: 13px; line-height: 1.5; }
+    .action-item:last-child { margin-bottom: 0; }
+    .action-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; flex-shrink: 0;
+    }
+    .action-num.red { background: rgba(239,68,68,0.2); color: #f87171; }
+    .action-num.yellow { background: rgba(245,158,11,0.2); color: var(--warning); }
+    .action-num.green { background: rgba(34,197,94,0.2); color: var(--success); }
+    .summary-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .summary-table th {
+      background: var(--surface2); padding: 10px 14px;
+      text-align: left; font-size: 10px; color: var(--muted);
+      text-transform: uppercase; border-bottom: 1px solid var(--border);
+    }
+    .summary-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(36,48,73,0.5);
+      background: var(--surface);
+    }
+    .risk-pill { padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+    .risk-alto { background: rgba(239,68,68,0.15); color: #f87171; }
+    .risk-medio { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .risk-baixo { background: rgba(34,197,94,0.15); color: var(--success); }
+    .disclaimer {
+      background: rgba(232,180,184,0.08);
+      border: 1px solid rgba(232,180,184,0.25);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+    .footer { text-align: center; margin-top: 28px; font-size: 11px; color: var(--muted); }
+    @media print {
+      body { background: #fff !important; color: #111 !important; padding: 12mm !important; max-width: none; }
+      .btn-print, .topbar .pills { display: none !important; }
+      .header, .scoreboard, .veredito, .section, .action-plan { break-inside: avoid-page; }
+      .header { background: #f4f6fa !important; border: 1px solid #ddd !important; }
+      .header h1, .item-title { color: #111 !important; }
+      .item-desc, .meta-item label, .footer { color: #444 !important; }
+      .score-card, .item, .section-header, .section-body { background: #fff !important; border-color: #ddd !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="pills">
+    <span class="pill pill-cfm">🩺 Médica — CFM</span>
+    <span class="pill pill-lgpd">🔐 LGPD</span>
+    <span class="pill pill-cdc">📋 CDC</span>
+  </div>
+  <button type="button" class="btn-print" onclick="window.print()" title="Imprimir ou salvar como PDF">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="6 9 6 2 18 2 18 9"/>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+      <rect x="6" y="14" width="12" height="8"/>
+    </svg>
+    Imprimir PDF
+  </button>
+</div>
+
+<div class="header">
+  <h1>Relatório de Conformidade — <em>Dra. Cynthia Netto</em></h1>
+  <p class="header-sub">
+    Auditoria remota do site institucional de ginecologista/mastologista em Belo Horizonte.
+    Classificação: <strong>Médica — profissional liberal regulado pelo CFM</strong>.
+    Bases aplicadas: Res. CFM 2.336/2023, Res. CFM 2.314/2022, Código de Ética Médica, LGPD e CDC.
+  </p>
+  <div class="header-meta">
+    <div class="meta-item"><label>Profissional</label><span>Dra. Cynthia Netto de Barros</span></div>
+    <div class="meta-item"><label>URL Auditada</label><span>dracynthianetto.com.br</span></div>
+    <div class="meta-item"><label>Especialidades</label><span>Ginecologia · Mastologia</span></div>
+    <div class="meta-item"><label>CRM / RQE</label><span>CRM/MG 29435 · RQE 28999, 18870</span></div>
+    <div class="meta-item"><label>Data</label><span>25/06/2026</span></div>
+    <div class="meta-item"><label>Plataforma</label><span>WordPress (Hostinger) · Sitex</span></div>
+  </div>
+</div>
+
+<div class="scoreboard">
+  <div class="score-card conformes"><div class="score-num">8</div><div class="score-label">✅ Conformes</div></div>
+  <div class="score-card atencao"><div class="score-num">5</div><div class="score-label">⚠️ Atenção</div></div>
+  <div class="score-card falhas"><div class="score-num">5</div><div class="score-label">❌ Não Conformes</div></div>
+  <div class="score-card criticos"><div class="score-num">2</div><div class="score-label">🔴 Críticos</div></div>
+</div>
+
+<div class="veredito">
+  <div class="veredito-icon">🔴</div>
+  <div class="veredito-text">
+    <h2>NÃO CONFORME — CFM E LGPD</h2>
+    <p>
+      O site tem boa estrutura visual, CRM/RQE visíveis, endereço completo, Política de Privacidade, Termos de Uso e banner de cookies. Porém apresenta <strong>violação crítica da Res. CFM 2.336/2023</strong>: seção <strong>"Depoimentos"</strong> com avaliações de 5 estrelas de pacientes (Helena T., Catarina Celles M., Suzana G.) e até estrelas na própria médica, com branding Google. Há também promessas de resultado no copy ("indolor", "resultados naturais", "única forma de evitar o câncer de colo") e Política de Privacidade genérica (template PT-PT/GDPR), sem tratamento adequado de <strong>dados sensíveis de saúde</strong> (Art. 11 LGPD).
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-num">1</div>
+    <div class="section-title">CFM — Publicidade Médica (Res. 2.336/2023)</div>
+    <span>▼</span>
+  </div>
+  <div class="section-body">
+    <div class="item">
+      <div>🔴</div>
+      <div>
+        <div class="item-title">🔴 CRÍTICO — Depoimentos de pacientes com estrelas</div>
+        <div class="item-desc">Seção <strong>"Depoimentos"</strong> exibe carrossel com 3 relatos de pacientes (Helena T., Catarina Celles M., Suzana G.), cada um com <strong>5 estrelas</strong> (<code>bi-star-fill</code>) e ícone do Google. A própria Dra. Cynthia aparece com 5 estrelas ao lado. Vedado pela Res. CFM 2.336/2023 (depoimentos e sistemas de avaliação).</div>
+        <span class="item-action">⚠️ Remover imediatamente toda a seção Depoimentos e estrelas</span>
+      </div>
+      <span class="item-badge badge-critical">🔴 CRÍTICO</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">CRM e RQE informados no hero</div>
+        <div class="item-desc">Destaque inicial: <strong>CRMMG: 29435</strong> e <strong>RQEs: 28999; 18870</strong>. Nome completo <strong>Dra. Cynthia Netto de Barros</strong> presente.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">Formato do CRM e palavra MÉDICA</div>
+        <div class="item-desc">Exibe <strong>"CRMMG"</strong> em vez do padrão <strong>"CRM/MG"</strong>. Título usa "Ginecologista, Mastologista" mas não inclui explicitamente a palavra <strong>"MÉDICA"</strong>, exigida pela Res. 2.336/2023 para identificação profissional.</div>
+        <span class="item-action">🔧 Ajustar para: "Dra. Cynthia Netto de Barros — MÉDICA · CRM/MG 29435"</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+    <div class="item">
+      <div>❌</div>
+      <div>
+        <div class="item-title">Promessas de resultado no copy</div>
+        <div class="item-desc">Encontrados: <strong>"indolor"</strong> (laser íntimo), <strong>"resultados naturais"</strong> (ninfoplastia), <strong>"garantindo relações mais prazerosas"</strong>, <strong>"eficazes"</strong> (tratamentos). CFM veda promessa ou garantia de resultado.</div>
+        <span class="item-action">🔧 Substituir por linguagem informativa: "procedimento realizado em consultório, com avaliação individual"</span>
+      </div>
+      <span class="item-badge badge-fail">NÃO CONFORME</span>
+    </div>
+    <div class="item">
+      <div>❌</div>
+      <div>
+        <div class="item-title">Sensacionalismo e afirmações absolutas</div>
+        <div class="item-desc"><strong>"desenvolvedora da primeira vacina contra HPV"</strong>, <strong>"a única forma de se evitar o câncer de colo"</strong>, <strong>"dependerá, 90%, de você"</strong> (menopausa). Linguagem que induz expectativa ou exagera credenciais.</div>
+        <span class="item-action">🔧 Qualificar: "participei da pesquisa clínica" / "importante fator de prevenção"</span>
+      </div>
+      <span class="item-badge badge-fail">NÃO CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Sem preços públicos ou contagem de pacientes</div>
+        <div class="item-desc">Não há tabela de preços, promoções ou estatísticas do tipo "+X pacientes atendidos". Agendamento via WhatsApp.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Sem imagens antes/depois identificadas</div>
+        <div class="item-desc">Galeria com fotos da médica e ícones de serviços. Não foram encontradas comparações explícitas antes/depois no HTML analisado.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">Marketing de cirurgias íntimas e cosmiatria</div>
+        <div class="item-desc">Seções detalham ninfoplastia, himenoplastia, clareamento vaginal, toxina botulínica e preenchimentos. Conteúdo informativo é permitido, mas exige tom sóbrio e sem apelo sensacionalista — revisar modais de "Cirurgias Íntimas" e "Cosmiatria Feminina".</div>
+        <span class="item-action">🔧 Revisar copy para caráter exclusivamente educativo</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-num">2</div>
+    <div class="section-title">LGPD — Privacidade e Dados de Saúde</div>
+    <span>▼</span>
+  </div>
+  <div class="section-body">
+    <div class="item">
+      <div>🔴</div>
+      <div>
+        <div class="item-title">🔴 CRÍTICO — Política inadequada para dados sensíveis de saúde</div>
+        <div class="item-desc">Política existe (<code>?termos=politica-de-privacidade</code>, atualizada 03/07/2025), porém é <strong>template genérico</strong> em português de Portugal ("partilha", "recolhemos"), baseado em GDPR, sem mencionar <strong>Lei 13.709/2018 (LGPD)</strong>, Art. 11 (dados de saúde) nem bases legais para prontuário/consulta. Retenção contraditória: "30 dias" <em>OU</em> período indefinido no mesmo parágrafo.</div>
+        <span class="item-action">⚠️ Reescrever política com foco LGPD + dados sensíveis médicos</span>
+      </div>
+      <span class="item-badge badge-critical">🔴 CRÍTICO</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">HTTPS ativo</div>
+        <div class="item-desc">Site servido via HTTPS na Hostinger com <code>content-security-policy: upgrade-insecure-requests</code>. Conforme Art. 46 LGPD.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Banner de cookies implementado</div>
+        <div class="item-desc">Banner com texto explicativo, link à política e botão <strong>"Concordo e fechar"</strong>, persistido em <code>localStorage</code> (<code>cookies_solucionar</code>).</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Termos de Uso publicados</div>
+        <div class="item-desc">Página <code>?termos=termos-de-uso</code> acessível pelo rodapé, com referência cruzada à política de privacidade.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">Canal de privacidade não identificado como encarregado</div>
+        <div class="item-desc">Política indica <strong>mamasemfoco@gmail.com</strong> para reclamações, mas não designa formalmente encarregado/DPO nem prazo de resposta aos direitos do Art. 18 em português claro.</div>
+        <span class="item-action">🔧 Incluir seção "Encarregado de Dados" com e-mail dedicado</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+    <div class="item">
+      <div>❌</div>
+      <div>
+        <div class="item-title">Política prevê tornar reviews públicas</div>
+        <div class="item-desc">Seção <strong>"CONTEÚDO GERADO PELO UTILIZADOR"</strong> afirma que reviews/comentários <em>"poderão ser tornados públicos no website"</em> — conflita com a necessidade de remover depoimentos e com sigilo médico.</div>
+        <span class="item-action">🔧 Remover cláusula e alinhar política ao Código de Ética Médica</span>
+      </div>
+      <span class="item-badge badge-fail">NÃO CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Captação via WhatsApp (sem formulário no site)</div>
+        <div class="item-desc">Contato redireciona para WhatsApp e e-mail — não há formulário HTML coletando dados sem aviso. Menor risco imediato, mas conversas de saúde no WhatsApp devem constar na política (operador Meta).</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">Cookies de publicidade descritos sem gestão granular</div>
+        <div class="item-desc">Política lista cookies de análise, publicidade e redes sociais, mas o banner só oferece aceite global — sem opção de recusar categorias não essenciais (boa prática ANPD).</div>
+        <span class="item-action">🔧 Implementar preferências de cookies ou remover trackers não usados</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-num">3</div>
+    <div class="section-title">CDC — Transparência ao Consumidor</div>
+    <span>▼</span>
+  </div>
+  <div class="section-body">
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Endereço e contatos completos</div>
+        <div class="item-desc"><strong>Rua Ceará, 195 – 7º andar, Conj. 708, Santa Efigênia, BH-MG, CEP 30150-310</strong>. WhatsApp <strong>(31) 98418-4586</strong>, e-mail <strong>mamasemfoco@gmail.com</strong>, Instagram <strong>@dracynthianetto</strong>.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">CNPJ não informado</div>
+        <div class="item-desc">Rodapé credita <strong>Sitex</strong> como desenvolvedor. Se a consulta é via pessoa física (CRM), CNPJ pode ser dispensável; se há clínica/empresa, deve constar.</div>
+        <span class="item-action">🔧 Confirmar natureza jurídica e incluir CNPJ se aplicável</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Serviços descritos sem preço fixo</div>
+        <div class="item-desc">Modelo de consulta personalizada com agendamento — adequado para medicina privada. Valores devem ser informados na consulta/contrato.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-num">4</div>
+    <div class="section-title">Boas Práticas Técnicas e UX</div>
+    <span>▼</span>
+  </div>
+  <div class="section-body">
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Site responsivo WordPress com boa navegação</div>
+        <div class="item-desc">One-page com modais de serviços, FAQ accordion, carrossel e CTAs WhatsApp consistentes. Tema customizado "Dra. Cynthia".</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>✅</div>
+      <div>
+        <div class="item-title">Meta title e description adequados</div>
+        <div class="item-desc"><code>Dra Cynthia Netto – Ginecologista, Mastologista e Especialista em Saúde Íntima Feminina</code>. SEO alinhado à especialidade.</div>
+      </div>
+      <span class="item-badge badge-ok">CONFORME</span>
+    </div>
+    <div class="item">
+      <div>❌</div>
+      <div>
+        <div class="item-title">Texto placeholder no FAQ (comentado)</div>
+        <div class="item-desc">HTML contém <code>&lt;!-- Amet sit Lorem ipsum... --&gt;</code> comentado na seção FAQ. Não visível ao usuário, mas indica revisão editorial incompleta no ambiente de produção.</div>
+        <span class="item-action">🔧 Remover comentários Lorem ipsum do código publicado</span>
+      </div>
+      <span class="item-badge badge-fail">NÃO CONFORME</span>
+    </div>
+    <div class="item">
+      <div>⚠️</div>
+      <div>
+        <div class="item-title">Imagem "Formulário" sem formulário funcional</div>
+        <div class="item-desc">Seção "Como funciona a consulta" usa imagem <code>Formulario-512x725-2.webp</code> como ilustração, sem formulário real — pode gerar expectativa de agendamento online inexistente.</div>
+        <span class="item-action">🔧 Substituir por foto de consultório ou adicionar formulário com LGPD</span>
+      </div>
+      <span class="item-badge badge-warn">ATENÇÃO</span>
+    </div>
+  </div>
+</div>
+
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;">
+  <div style="padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;">📊 Tabela Resumo</div>
+  <div style="overflow-x:auto;">
+    <table class="summary-table">
+      <thead><tr><th>Categoria</th><th>Status</th><th>Risco</th></tr></thead>
+      <tbody>
+        <tr><td>Depoimentos / estrelas</td><td>❌ Crítico CFM</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
+        <tr><td>CRM / RQE visíveis</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>Palavra MÉDICA / CRM/MG</td><td>⚠️ Atenção</td><td><span class="risk-pill risk-medio">Médio</span></td></tr>
+        <tr><td>Promessas de resultado</td><td>❌ Não Conforme</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
+        <tr><td>Política de Privacidade (saúde)</td><td>❌ Crítico LGPD</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
+        <tr><td>Banner de cookies</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>Termos de Uso</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>HTTPS</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>Endereço e contatos</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>Antes/depois / preços</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="action-plan">
+  <div class="action-plan-header">🗂️ Plano de Ação Priorizado</div>
+  <div class="action-group">
+    <div class="action-group-title red">🔴 Até 7 dias</div>
+    <div class="action-item">
+      <div class="action-num red">1</div>
+      <div><strong>Remover seção Depoimentos</strong> inteira (carrossel, estrelas, nomes de pacientes e rating da médica).</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num red">2</div>
+      <div><strong>Reescrever Política de Privacidade</strong> em PT-BR, citando LGPD, Art. 11 (dados de saúde), WhatsApp/Meta e prazos de retenção de prontuário.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num red">3</div>
+      <div><strong>Corrigir copy CFM</strong>: retirar "indolor", "resultados naturais", "única forma de evitar" e "90% de você".</div>
+    </div>
+  </div>
+  <div class="action-group">
+    <div class="action-group-title yellow">🟡 Até 15 dias</div>
+    <div class="action-item">
+      <div class="action-num yellow">4</div>
+      <div><strong>Ajustar identificação</strong>: "MÉDICA", "CRM/MG 29435", RQEs com nome das especialidades.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num yellow">5</div>
+      <div><strong>Revisar modais</strong> de cirurgias íntimas e cosmiatria para tom educativo/informativo.</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num yellow">6</div>
+      <div><strong>Designar encarregado de dados</strong> e remover cláusula de publicação de reviews.</div>
+    </div>
+  </div>
+  <div class="action-group">
+    <div class="action-group-title green">🟢 Até 30 dias</div>
+    <div class="action-item">
+      <div class="action-num green">7</div>
+      <div><strong>Cookie consent granular</strong> ou auditoria de scripts (remover cookies de publicidade se não utilizados).</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num green">8</div>
+      <div><strong>Revisão editorial completa</strong> — remover placeholders, validar claim sobre vacina HPV com documentação.</div>
+    </div>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <strong>⚠️ Nota:</strong> Relatório orientativo baseado em análise remota de <strong>dracynthianetto.com.br</strong> (home, política de privacidade e termos de uso) em 25/06/2026. Classificação: médica/ginecologista (CFM + LGPD + CDC). Não substitui assessoria jurídica nem parecer do CRM/MG. Índice de conformidade: <strong>40%</strong> (8/20 itens) — Não Conforme, com 2 itens críticos.
+</div>
+
+<div class="footer">
+  <p>Auditoria gerada pelo skill <strong>site-compliance-audit</strong> · 25/06/2026</p>
+</div>
+
+<script>
+  function toggle(h) {
+    const b = h.nextElementSibling;
+    b.style.display = b.style.display === 'none' ? 'block' : 'none';
+  }
+</script>
+</body>
+</html>
