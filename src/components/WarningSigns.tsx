@@ -6,7 +6,7 @@ import { WARNING_SIGNS } from "@/lib/site-config";
 
 export function WarningSigns() {
   return (
-    <section id="sinais" className="bg-white py-16 lg:py-24">
+    <section id="sinais" className="bg-white py-10 lg:py-14">
       <div className="mx-auto max-w-6xl px-5">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-rose-dark">
@@ -23,7 +23,7 @@ export function WarningSigns() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {WARNING_SIGNS.map((sign, i) => (
             <motion.div
               key={sign.title}

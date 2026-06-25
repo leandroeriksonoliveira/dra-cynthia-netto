@@ -40,6 +40,7 @@ export const metadata: Metadata = {
     title: SITE_TITLE,
     description: OG_DESCRIPTION,
   },
+  referrer: "origin-when-cross-origin",
   robots: { index: true, follow: true },
 };
 

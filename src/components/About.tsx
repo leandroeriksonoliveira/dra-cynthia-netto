@@ -7,9 +7,9 @@ import { BIO_PARAGRAPHS, CONTENT_DISCLAIMER, DOCTOR_NAME } from "@/lib/site-conf
 
 export function About() {
   return (
-    <section id="sobre" className="bg-white py-16 lg:py-24">
+    <section id="sobre" className="bg-white py-10 lg:py-14">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <div className="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}

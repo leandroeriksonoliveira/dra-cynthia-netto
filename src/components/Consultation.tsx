@@ -8,7 +8,7 @@ const ICONS = [ClipboardList, HeartHandshake, Cpu, MessageCircleQuestion];
 
 export function Consultation() {
   return (
-    <section id="consulta" className="mesh-gradient py-16 lg:py-24">
+    <section id="consulta" className="mesh-gradient py-10 lg:py-14">
       <div className="mx-auto max-w-6xl px-5">
         <div className="text-center">
           <span className="text-sm font-semibold text-rose-dark">Atendimento</span>
@@ -17,7 +17,7 @@ export function Consultation() {
           </h2>
         </div>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {CONSULTATION_STEPS.map((step, i) => {
             const Icon = ICONS[i] ?? ClipboardList;
             return (
@@ -42,7 +42,7 @@ export function Consultation() {
           })}
         </div>
 
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <a
             href={WHATSAPP_URL}
             target="_blank"

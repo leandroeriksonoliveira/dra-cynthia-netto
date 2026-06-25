@@ -3,6 +3,8 @@
  * Conteúdo em conformidade com Res. CFM 2.336/2023 e LGPD (Lei 13.709/2018)
  */
 
+import { SKETCHFAB_MODELS } from "./anatomy-3d";
+
 // ─── Contato ───────────────────────────────────────────────────────────────
 
 export const WHATSAPP_PHONE = "5531984184586";
@@ -105,8 +107,8 @@ export type Specialty = {
   shortDescription: string;
   fullDescription: string;
   image: string;
-  /** ID do modelo BioDigital Human (anatomia 3D interativa) */
-  biodigitalViewId: string;
+  /** Modelo 3D Sketchfab (CC BY — embed gratuito, sem conta) */
+  sketchfabModelId: string;
   /** ID do vídeo educativo no YouTube (embed verificado) */
   videoId?: string;
   color3d: string;
@@ -121,7 +123,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "A incontinência urinária de esforço e a urgência miccional são condições comuns, especialmente após gestações e na menopausa. Após avaliação clínica detalhada, podem ser indicadas opções como fisioterapia pélvica, laserterapia vaginal ou procedimentos cirúrgicos minimamente invasivos, conforme cada caso.",
     image: "/images/specialty-incontinencia.webp",
-    biodigitalViewId: "production/femaleAdult/female_region_pelvis_10",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveUrinary,
     videoId: "5-bz97yXH-Q",
     color3d: "#e8b4b8",
     icon: "droplets",
@@ -133,7 +135,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "A menopausa traz mudanças hormonais que podem afetar o bem-estar físico e emocional. Com avaliação detalhada, são indicadas terapias hormonais individualizadas para controle de sintomas como ondas de calor, insônia, ressecamento vaginal e alterações de humor — sempre com acompanhamento médico regular.",
     image: "/images/specialty-menopausa.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "c0JQn8KVGMk",
     color3d: "#c97b84",
     icon: "heart-pulse",
@@ -145,7 +147,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "A colposcopia é um exame que permite visualizar o colo do útero com aumento, identificando lesões causadas pelo HPV ou outras condições. Biópsias direcionadas auxiliam no diagnóstico precoce. A vacinação contra o HPV é um importante fator de prevenção do câncer de colo uterino, complementar ao rastreamento periódico.",
     image: "/images/specialty-hpv.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "huyn7M8VmqI",
     color3d: "#7c9cbf",
     icon: "microscope",
@@ -157,7 +159,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "Atuação em cânceres ginecológicos e de mama, com experiência em cirurgia oncológica e reconstrutora. O acompanhamento abrange desde o diagnóstico até a reabilitação estética e funcional, em equipe multidisciplinar quando necessário.",
     image: "/images/specialty-oncologico.webp",
-    biodigitalViewId: "production/femaleAdult/breast_cross_section",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveWhole,
     videoId: "Z-kRp_IO7Ko",
     color3d: "#9b7cb8",
     icon: "shield-plus",
@@ -169,7 +171,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "Procedimento realizado em consultório, com avaliação individualizada prévia. Utiliza plataforma de laser de CO2 fracionado, Erbium e YAG. São realizadas, inicialmente, 3 sessões com intervalo de 28 a 38 dias. Indicado para síndrome geniturinária da menopausa, flacidez vaginal, lubrificação e outras condições — conforme indicação médica.",
     image: "/images/specialty-rejuvenescimento.webp",
-    biodigitalViewId: "production/femaleAdult/uterus_vagina_coronal_cross_section",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "c0JQn8KVGMk",
     color3d: "#d4a5a9",
     icon: "sparkles",
@@ -181,7 +183,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "DIUs hormonais ou sem hormônios, implantes hormonais e contraceptivos orais são opções de contracepção que serão adaptadas ao seu estilo de vida e fase da vida, após consulta e avaliação individualizada.",
     image: "/images/specialty-diu.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "5-bz97yXH-Q",
     color3d: "#6b9e8f",
     icon: "circle-dot",
@@ -193,7 +195,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "Em alguns casos de endometriose, o tratamento clínico com progesteronas de última geração pode ser indicado. Quando a cirurgia é necessária, são utilizadas técnicas minimamente invasivas por videolaparoscopia, com recuperação mais rápida.",
     image: "/images/specialty-videolaparoscopia.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "GfrgbtXRCHw",
     color3d: "#5a8fa8",
     icon: "scan",
@@ -205,7 +207,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "Cirurgias como ninfoplastia podem ser indicadas para mulheres que se sentem desconfortáveis com a estética ou função da região íntima. O procedimento é realizado com técnicas refinadas, após avaliação individualizada e esclarecimento sobre indicações, riscos e cuidados pós-operatórios.",
     image: "/images/specialty-cirurgias-intimas.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "5-bz97yXH-Q",
     color3d: "#b88c9e",
     icon: "scissors",
@@ -217,7 +219,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "O implante hormonal subdérmico (Implanon) é uma opção de contracepção de longa duração. Após consulta e avaliação das contraindicações, o procedimento de inserção é realizado em consultório.",
     image: "/images/specialty-implantes.webp",
-    biodigitalViewId: "production/femaleAdult/female_reproductive_cross_section_sagittal",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveCrossSection,
     videoId: "c0JQn8KVGMk",
     color3d: "#8cb8a8",
     icon: "pill",
@@ -229,7 +231,7 @@ export const SPECIALTIES: Specialty[] = [
     fullDescription:
       "Procedimentos estéticos ginecológicos realizados em consultório, como clareamento genital, preenchimentos e toxina botulínica, mediante avaliação individualizada. Conteúdo informativo — cada caso requer consulta presencial para indicação adequada.",
     image: "/images/specialty-cosmiatria.webp",
-    biodigitalViewId: "production/femaleAdult/female_region_pelvis_10",
+    sketchfabModelId: SKETCHFAB_MODELS.reproductiveUrinary,
     videoId: "5-bz97yXH-Q",
     color3d: "#c9a0b0",
     icon: "gem",

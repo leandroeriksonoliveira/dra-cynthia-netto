@@ -280,6 +280,12 @@
     .preview-placeholder p { font-size: 12px; color: var(--text-muted); margin-top: 8px; }
     .preview-placeholder a { color: var(--accent); font-weight: 700; }
 
+    .preview-image {
+      width: 100%;
+      display: block;
+      vertical-align: top;
+    }
+
     .preview-caption {
       margin-top: 6px;
       font-size: 10px;
@@ -357,51 +363,41 @@
     <div class="section">
       <div class="section-title">Diagnóstico — Situação Atual</div>
       <p class="text-block">
-        Auditoria remota realizada em <strong>25/06/2026</strong> sobre <strong>dracynthianetto.com.br</strong> (WordPress/Hostinger) identificou índice de conformidade de <strong>40%</strong> (8/20 itens) — veredito <strong>NÃO CONFORME</strong>, com <strong>2 itens críticos</strong>. O site apresenta boa estrutura visual, porém expõe a médica a riscos éticos, regulatórios e de proteção de dados que exigem correção imediata.
+        Auditoria remota realizada em <strong>25/06/2026</strong> sobre <strong>dracynthianetto.com.br</strong> identificou índice de conformidade de <strong>38%</strong> — veredito <strong>NÃO CONFORME</strong>. O site apresenta exposição a riscos éticos, regulatórios e de proteção de dados que exigem correção imediata.
       </p>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Problema Identificado</th>
               <th>Severidade</th>
-              <th>Base Legal</th>
+              <th>Quantidade de itens</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>Seção <strong>Depoimentos</strong> com avaliações de pacientes (estrelas Google)</td>
               <td><span class="badge-critical">CRÍTICO</span></td>
-              <td>Res. CFM 2.336/2023 — publicidade vedada</td>
+              <td><strong>2</strong></td>
             </tr>
             <tr>
-              <td>Política de Privacidade genérica (GDPR/PT-PT), sem LGPD Art. 11 (saúde)</td>
-              <td><span class="badge-critical">CRÍTICO</span></td>
-              <td>Lei 13.709/2018 (LGPD)</td>
-            </tr>
-            <tr>
-              <td>Promessas de resultado no copy ("indolor", "resultados naturais")</td>
               <td><span class="badge-warn">ALTO</span></td>
-              <td>Res. CFM 2.336/2023 · CEM Art. 113</td>
+              <td><strong>6</strong></td>
             </tr>
             <tr>
-              <td>Identificação sem palavra MÉDICA / formato CRM/MG</td>
-              <td><span class="badge-warn">MÉDIO</span></td>
-              <td>Res. CFM 2.336/2023 Art. 4º</td>
+              <td><span class="badge-ok" style="background:rgba(124,156,191,0.15);color:#5a7a9a;">MÉDIO</span></td>
+              <td><strong>5</strong></td>
             </tr>
-            <tr>
-              <td>Banner de cookies sem gestão granular</td>
-              <td><span class="badge-warn">MÉDIO</span></td>
-              <td>LGPD · boas práticas ANPD</td>
+            <tr style="font-weight:700;background:var(--bg-surface);">
+              <td>Total de itens avaliados</td>
+              <td><strong>21</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="warning-box">
-        <strong>⚠️ Risco imediato:</strong> A seção de depoimentos com estrelas de pacientes configura violação expressa da Res. CFM 2.336/2023 e pode ensejar notificação pela CODAME/CRM-MG, processo ético-profissional e dano reputacional irreversível enquanto permanecer publicada.
-      </div>
+      <p class="text-block" style="margin-top:8px;font-size:11px;">
+        O detalhamento técnico de cada item auditado consta em relatório separado, de uso exclusivo da contratada — não incluso nesta proposta comercial.
+      </p>
     </div>
 
     <div class="section">
@@ -474,28 +470,27 @@
     <div class="section">
       <div class="section-title">Objetivo Estratégico</div>
       <p class="text-block">
-        Esta proposta estabelece os parâmetros para <strong>eliminar as não conformidades críticas</strong>, <strong>revitalizar a comunicação visual</strong> do consultório e implantar um ecossistema digital moderno, seguro e em conformidade com a Res. CFM 2.336/2023, Código de Ética Médica e LGPD — incluindo especialidades com <strong>anatomia 3D interativa</strong> (BioDigital Human), vídeos educativos, navegação aprimorada e canais de contato otimizados.
+        Esta proposta estabelece os parâmetros para <strong>eliminar todas as não conformidades identificadas</strong>, <strong>revitalizar a comunicação visual</strong> do consultório e implantar um ecossistema digital moderno, seguro e em conformidade com a Res. CFM 2.336/2023, Código de Ética Médica e LGPD — incluindo recursos educativos por especialidade (vídeos e modelos 3D interativos, quando disponíveis), navegação aprimorada e canais de contato otimizados.
       </p>
     </div>
 
     <div class="section">
       <div class="section-title">Prévia do Produto — Site Revitalizado</div>
-      <p class="text-block">Protótipo já desenvolvido e publicado em ambiente de preview, demonstrando identidade visual moderna, conformidade CFM/LGPD e recursos 3D nas especialidades:</p>
+      <p class="text-block">Protótipo já desenvolvido, demonstrando identidade visual moderna e estrutura em conformidade regulatória:</p>
       <div class="preview-frame">
         <div class="preview-toolbar">
           <span class="preview-dot"></span>
           <span class="preview-dot"></span>
           <span class="preview-dot"></span>
-          <span class="preview-url">dracynthianetto.com.br → dra-cynthia-netto.vercel.app</span>
+          <span class="preview-url">dracynthianetto.com.br</span>
         </div>
-        <div class="preview-placeholder">
-          <p style="font-size:28px;margin:0;">🩺</p>
-          <p><strong>Site Next.js — Dra. Cynthia Netto</strong></p>
-          <p>Hero moderno · 10 especialidades com 3D BioDigital · FAQ · LGPD · Sem depoimentos</p>
-          <p><a href="https://dra-cynthia-netto.vercel.app" target="_blank" rel="noopener">dra-cynthia-netto.vercel.app</a></p>
-        </div>
+        <img
+          src="proposta-preview-site.png"
+          alt="Prévia da página inicial do site revitalizado — Dra. Cynthia Netto"
+          class="preview-image"
+        />
       </div>
-      <p class="preview-caption">Após contratação: apontamento do domínio <strong>dracynthianetto.com.br</strong> para a nova infraestrutura (Vercel).</p>
+      <p class="preview-caption">Prévia da página inicial do site revitalizado. Após contratação: publicação no domínio <strong>dracynthianetto.com.br</strong>.</p>
     </div>
 
     <div class="section">
@@ -504,28 +499,23 @@
       <p class="text-block" style="color: var(--accent); font-weight: 700;">Fase 1: Correção, Revitalização e Publicação (Investimento Único — R$ 10.000,00)</p>
 
       <div class="scope-box">
-        <h3>🔴 Correção de Não Conformidades Críticas CFM</h3>
-        <p>Remoção integral da seção Depoimentos/estrelas; revisão de todo o copy eliminando promessas de resultado; ajuste de identificação profissional (MÉDICA · CRM/MG 29435 · RQEs); tom educativo em modais de cirurgias íntimas e cosmiatria.</p>
+        <h3>✅ Regularização Integral de Conformidade</h3>
+        <p>Implementação de <strong>todos os itens</strong> apontados no diagnóstico de conformidade (CFM, LGPD e CDC), incluindo revisão de conteúdo, documentos legais e ajustes técnicos, com reauditoria e homologação documentada.</p>
       </div>
 
       <div class="scope-box">
-        <h3>🔐 Blindagem LGPD Completa</h3>
-        <p>Reescrita da Política de Privacidade em PT-BR (Lei 13.709/2018, Art. 11 — dados sensíveis de saúde); Termos de Uso; designação de Encarregado de Dados (DPO); banner de cookies com preferências granulares; cláusulas sobre WhatsApp/Meta e retenção de prontuário.</p>
+        <h3>⚡ Site Institucional Moderno</h3>
+        <p>Desenvolvimento completo: hero, sobre, especialidades, sinais de alerta, fluxo de consulta, FAQ, contato com mapa, WhatsApp flutuante. Performance otimizada, responsivo e SEO configurado.</p>
       </div>
 
       <div class="scope-box">
-        <h3>⚡ Site Institucional Moderno (Next.js + Vercel)</h3>
-        <p>Desenvolvimento completo: hero, sobre, 10 especialidades, sinais de alerta, fluxo de consulta, FAQ, contato com mapa, WhatsApp flutuante. Performance otimizada, responsivo e SEO configurado.</p>
-      </div>
-
-      <div class="scope-box">
-        <h3>🧬 Anatomia 3D e Vídeos Educativos por Especialidade</h3>
-        <p>Integração de modelos interativos <strong>BioDigital Human</strong> (padrão human.biodigital.com) em cada especialidade — rotação, camadas anatômicas e labels educativos. Vídeos de anatomia (Nucleus Medical Media / conteúdo educativo) em modais por área de atuação. Ilustrações originais do site preservadas.</p>
+        <h3>🧬 Conteúdo Educativo por Especialidade</h3>
+        <p>Inclusão de vídeos e modelos 3D interativos de anatomia, <strong>quando disponíveis</strong> em licença adequada, em modais por área de atuação. Ilustrações originais do consultório preservadas.</p>
       </div>
 
       <div class="scope-box">
         <h3>🌐 Migração de Domínio dracynthianetto.com.br</h3>
-        <p>Apontamento DNS do domínio existente para infraestrutura Vercel; certificado SSL automático; desativação/redirecionamento do WordPress antigo (Hostinger).</p>
+        <p>Apontamento DNS do domínio existente para nova infraestrutura em nuvem; certificado SSL automático; desativação/redirecionamento do site antigo.</p>
       </div>
 
       <div class="scope-box">
@@ -536,7 +526,7 @@
       <p class="text-block" style="color: var(--cyan); font-weight: 700; margin-top: 8px;">Fase 2: Manutenção e Conformidade Contínua (Mensal — R$ 500,00)</p>
 
       <div class="scope-box">
-        <h3>☁️ Hospedagem Cloud Profissional (Vercel)</h3>
+        <h3>☁️ Hospedagem Cloud Profissional</h3>
         <p>Servidores globais com CDN, monitoramento de uptime e SSL inclusos — sem custo adicional de servidores.</p>
       </div>
 
@@ -567,7 +557,7 @@
             <tr>
               <td><strong>dracynthianetto.com.br</strong></td>
               <td><span class="badge-owned">Registrado · Ativo</span></td>
-              <td>Reapontar DNS para Vercel (incluso na Fase 1). Manter domínio atual da médica.</td>
+              <td>Reapontar DNS para nova infraestrutura (incluso na Fase 1). Manter domínio atual da médica.</td>
             </tr>
           </tbody>
         </table>
@@ -578,7 +568,7 @@
       <div class="section-title">03. Investimento</div>
 
       <div class="region-note">
-        <strong>📍 Belo Horizonte/MG:</strong> Valores consideram complexidade regulatória médica (CFM + LGPD dados de saúde), migração de WordPress, integração 3D BioDigital e escopo equivalente às propostas Veltro Digital para profissionais liberais de saúde.
+        <strong>📍 Belo Horizonte/MG:</strong> Valores consideram complexidade regulatória médica (CFM + LGPD dados de saúde), migração de plataforma, conteúdo educativo e escopo equivalente às propostas Veltro Digital para profissionais liberais de saúde.
       </div>
 
       <div class="table-wrap">
@@ -589,12 +579,12 @@
           <tbody>
             <tr class="total-row">
               <td><strong>Fase 1 (Taxa Única)</strong></td>
-              <td>Correção CFM/LGPD · site Next.js revitalizado · anatomia 3D BioDigital · vídeos educativos · migração domínio · relatório de conformidade homologado</td>
+              <td>Regularização CFM/LGPD · site revitalizado · conteúdo educativo (vídeos e 3D) · migração domínio · relatório de conformidade homologado</td>
               <td><strong>R$ 10.000,00</strong></td>
             </tr>
             <tr class="total-row-mensal">
               <td><strong>Fase 2 (Mensal)</strong></td>
-              <td>Hospedagem Vercel · suporte · 3 alterações/mês · auditoria anual de conformidade incluída</td>
+              <td>Hospedagem em nuvem · suporte · 3 alterações/mês · auditoria anual de conformidade incluída</td>
               <td><strong>R$ 500,00 / mês</strong></td>
             </tr>
           </tbody>
@@ -610,10 +600,10 @@
     <div class="section">
       <div class="section-title">04. Exclusões (Fora de Escopo)</div>
       <ul class="bullet-list">
-        <li>Produção de fotos/vídeos profissionais da médica (utiliza-se material existente + conteúdo educativo de terceiros).</li>
-        <li>Gestão de tráfego pago (Google Ads, Meta Ads).</li>
+        <li>Produção de fotos/vídeos profissionais da médica (utiliza-se material existente e conteúdo educativo de terceiros, quando licenciado).</li>
+        <li>Gestão de tráfego pago (anúncios em plataformas digitais).</li>
         <li>Redação clínica — responsabilidade técnica do conteúdo médico é da Dra. Cynthia; Veltro responde pela engenharia e conformidade técnica.</li>
-        <li>Licenças BioDigital Human Pro (modelos públicos/educativos inclusos; licença comercial premium sob orçamento separado se necessário).</li>
+        <li>Licenças premium de conteúdo audiovisual ou 3D de fornecedores pagos (conteúdo gratuito/educativo incluso quando disponível).</li>
         <li>Assessoria jurídica ou defesa em processos éticos já instaurados.</li>
       </ul>
     </div>
@@ -625,8 +615,8 @@
           <table>
             <thead><tr><th>Etapa</th><th>Prazo</th></tr></thead>
             <tbody>
-              <tr><td>Correção crítica CFM (remoção depoimentos + copy)</td><td>Até 3 dias úteis</td></tr>
-              <tr><td>Blindagem LGPD (política, termos, cookies)</td><td>Até 4 dias úteis</td></tr>
+              <tr><td>Regularização de conformidade (CFM, LGPD, CDC)</td><td>Até 5 dias úteis</td></tr>
+              <tr><td>Documentação legal e cookies</td><td>Até 4 dias úteis</td></tr>
               <tr><td>Deploy site revitalizado + domínio</td><td>Até 5 dias úteis</td></tr>
               <tr><td>Relatório de Conformidade homologado</td><td>Até 3 dias úteis após go-live</td></tr>
               <tr style="font-weight:bold;color:var(--accent);background:rgba(201,123,132,0.05);">

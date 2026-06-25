@@ -66,7 +66,7 @@ export function Header() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-lg px-3 py-2 text-sm font-medium text-ink-soft transition hover:bg-rose-light/50 hover:text-ink"
+              className="rounded-lg px-3 py-2 text-base font-medium text-ink-soft transition hover:bg-rose-light/50 hover:text-ink"
             >
               {link.label}
             </a>
@@ -75,7 +75,7 @@ export function Header() {
             href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-2 rounded-full bg-rose-dark px-5 py-2 text-sm font-semibold text-white transition hover:bg-rose-dark/90"
+            className="ml-2 rounded-full bg-rose-dark px-5 py-2.5 text-base font-semibold text-white transition hover:bg-rose-dark/90"
           >
             Agendar consulta
           </a>
@@ -99,7 +99,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-ink-soft transition hover:bg-rose-light/50"
+                className="rounded-lg px-3 py-3 text-base font-medium text-ink-soft transition hover:bg-rose-light/50"
               >
                 {link.label}
               </a>
@@ -108,7 +108,7 @@ export function Header() {
               href={WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-2 rounded-full bg-rose-dark px-5 py-3 text-center text-sm font-semibold text-white"
+              className="mt-2 rounded-full bg-rose-dark px-5 py-3 text-center text-base font-semibold text-white"
             >
               Agendar consulta
             </a>

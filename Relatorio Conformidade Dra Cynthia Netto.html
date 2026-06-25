@@ -224,6 +224,41 @@
       line-height: 1.6;
     }
     .footer { text-align: center; margin-top: 28px; font-size: 11px; color: var(--muted); }
+    .penalty-intro {
+      background: rgba(239,68,68,0.08);
+      border: 1px solid rgba(239,68,68,0.3);
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      margin-bottom: 16px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--muted);
+    }
+    .penalty-intro strong { color: #fca5a5; }
+    .penalty-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .penalty-table th {
+      background: var(--surface2); padding: 10px 12px;
+      text-align: left; font-size: 10px; color: var(--muted);
+      text-transform: uppercase; border-bottom: 1px solid var(--border);
+    }
+    .penalty-table td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(36,48,73,0.5);
+      background: var(--surface);
+      vertical-align: top;
+      line-height: 1.55;
+    }
+    .penalty-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .penalty-note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(124,156,191,0.08);
+      border: 1px solid rgba(124,156,191,0.25);
+      border-radius: 8px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
     @media print {
       body { background: #fff !important; color: #111 !important; padding: 12mm !important; max-width: none; }
       .btn-print, .topbar .pills { display: none !important; }
@@ -265,7 +300,7 @@
     <div class="meta-item"><label>URL Auditada</label><span>dracynthianetto.com.br</span></div>
     <div class="meta-item"><label>Especialidades</label><span>Ginecologia · Mastologia</span></div>
     <div class="meta-item"><label>CRM / RQE</label><span>CRM/MG 29435 · RQE 28999, 18870</span></div>
-    <div class="meta-item"><label>Data</label><span>25/06/2026</span></div>
+    <div class="meta-item"><label>Data da auditoria</label><span>25/06/2026 (revisão ao vivo)</span></div>
     <div class="meta-item"><label>Plataforma</label><span>WordPress (Hostinger) · Sitex</span></div>
   </div>
 </div>
@@ -273,7 +308,7 @@
 <div class="scoreboard">
   <div class="score-card conformes"><div class="score-num">8</div><div class="score-label">✅ Conformes</div></div>
   <div class="score-card atencao"><div class="score-num">5</div><div class="score-label">⚠️ Atenção</div></div>
-  <div class="score-card falhas"><div class="score-num">5</div><div class="score-label">❌ Não Conformes</div></div>
+  <div class="score-card falhas"><div class="score-num">6</div><div class="score-label">❌ Não Conformes</div></div>
   <div class="score-card criticos"><div class="score-num">2</div><div class="score-label">🔴 Críticos</div></div>
 </div>
 
@@ -298,7 +333,7 @@
       <div>🔴</div>
       <div>
         <div class="item-title">🔴 CRÍTICO — Depoimentos de pacientes com estrelas</div>
-        <div class="item-desc">Seção <strong>"Depoimentos"</strong> exibe carrossel com 3 relatos de pacientes (Helena T., Catarina Celles M., Suzana G.), cada um com <strong>5 estrelas</strong> (<code>bi-star-fill</code>) e ícone do Google. A própria Dra. Cynthia aparece com 5 estrelas ao lado. Vedado pela Res. CFM 2.336/2023 (depoimentos e sistemas de avaliação).</div>
+        <div class="item-desc">Seção <strong>"Depoimentos"</strong> exibe carrossel com 3 relatos de pacientes (Helena T., Catarina Celles M., Suzana G.), cada um com <strong>5 estrelas</strong> (<code>bi-star-fill</code>), avatar e ícone <strong>Google Meu Negócio</strong>. A própria Dra. Cynthia aparece com 5 estrelas ao lado. Vedado pela Res. CFM 2.336/2023 e CEM Art. 113 (publicidade com elogios de pacientes). Confirmado em auditoria ao vivo em 25/06/2026 — conteúdo permanece publicado.</div>
         <span class="item-action">⚠️ Remover imediatamente toda a seção Depoimentos e estrelas</span>
       </div>
       <span class="item-badge badge-critical">🔴 CRÍTICO</span>
@@ -333,7 +368,7 @@
       <div>❌</div>
       <div>
         <div class="item-title">Sensacionalismo e afirmações absolutas</div>
-        <div class="item-desc"><strong>"desenvolvedora da primeira vacina contra HPV"</strong>, <strong>"a única forma de se evitar o câncer de colo"</strong>, <strong>"dependerá, 90%, de você"</strong> (menopausa). Linguagem que induz expectativa ou exagera credenciais.</div>
+        <div class="item-desc">Modal HPV: <strong>"desenvolvedora da primeira vacina contra HPV"</strong>, <strong>"a única forma de se evitar o câncer de colo"</strong>. Modal Menopausa: <strong>"dependerá, 90%, de você"</strong>. Modal Cirurgias Íntimas: <strong>"O Brasil é líder mundial"</strong> em cirurgias íntimas. Linguagem que induz expectativa, exagera credenciais ou apela sensacionalista.</div>
         <span class="item-action">🔧 Qualificar: "participei da pesquisa clínica" / "importante fator de prevenção"</span>
       </div>
       <span class="item-badge badge-fail">NÃO CONFORME</span>
@@ -523,6 +558,77 @@
   </div>
 </div>
 
+<div class="section">
+  <div class="section-header" onclick="toggle(this)">
+    <div class="section-num">5</div>
+    <div class="section-title">Penalidades, Multas e Consequências Jurídicas</div>
+    <span>▼</span>
+  </div>
+  <div class="section-body" style="padding:18px;">
+    <div class="penalty-intro">
+      <strong>⚠️ Exposição atual:</strong> Com 2 itens críticos ativos (depoimentos com estrelas + política LGPD inadequada para dados de saúde), o site em <strong>dracynthianetto.com.br</strong> expõe a Dra. Cynthia Netto às consequências abaixo. Valores e penas dependem de gravidade, reincidência e decisão das autoridades — este quadro é orientativo, não uma sentença.
+    </div>
+    <div style="overflow-x:auto;">
+      <table class="penalty-table">
+        <thead>
+          <tr>
+            <th>Esfera / Autoridade</th>
+            <th>Consequência ou penalidade possível</th>
+            <th>Fundamentação legal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>CFM / CRM-MG</td>
+            <td>
+              <strong>Processo Ético-Profissional (PEP)</strong> — penas graduadas (Lei 3.268/57, Art. 22):<br>
+              a) Advertência confidencial<br>
+              b) Censura confidencial<br>
+              c) <strong>Censura pública</strong> em publicação oficial do CRM<br>
+              d) <strong>Suspensão do exercício</strong> por até 30 dias<br>
+              e) <strong>Cassação do registro</strong>, ad referendum do CFM
+            </td>
+            <td>Res. CFM 2.336/2023 · Res. CFM 2.306/2022 · CEM Arts. 113–114 · Lei 3.268/57</td>
+          </tr>
+          <tr>
+            <td>CFM / CODAME</td>
+            <td>Notificação para retificação ou exclusão imediata de conteúdo; investigação de elogios reiterados; convocação para esclarecimentos; registro de irregularidade na ficha profissional; possível encaminhamento ao PEP</td>
+            <td>Res. CFM 2.336/2023 Art. 8º §§ 3º e 4º</td>
+          </tr>
+          <tr>
+            <td>ANPD (LGPD)</td>
+            <td>Sanções administrativas (Art. 52 LGPD): advertência; <strong>multa simples até 2% do faturamento</strong> da pessoa jurídica, por infração, com limite de <strong>R$ 50 milhões</strong>; multa diária; publicização da infração; bloqueio ou eliminação de dados; suspensão do tratamento por até 6 meses; proibição parcial ou total de atividades de tratamento</td>
+            <td>Lei 13.709/2018 Art. 52 · Res. CD/ANPD nº 4/2023</td>
+          </tr>
+          <tr>
+            <td>LGPD — Dados de saúde</td>
+            <td>Tratamento irregular de dados sensíveis (Art. 11) eleva a gravidade; <strong>responsabilização civil</strong> por danos morais e materiais (Art. 42); possível ação civil pública (MP/ANPD). Depoimentos com nomes de pacientes no site público agravam risco de exposição de dados de saúde</td>
+            <td>LGPD Arts. 5º XI, 11, 42, 52 · CDC Art. 6º</td>
+          </tr>
+          <tr>
+            <td>Civil / CDC</td>
+            <td>Indenização por <strong>publicidade enganosa ou abusiva</strong> (promessas de resultado, "indolor", "resultados naturais"); ações de consumidor por informação inadequada sobre serviços médicos; inversão do ônus da prova em favor do consumidor (Art. 6º VIII CDC)</td>
+            <td>CDC Arts. 6º, 30, 37, 42, 56</td>
+          </tr>
+          <tr>
+            <td>Google / plataformas</td>
+            <td>Remoção de avaliações ou restrição de perfil Google Meu Negócio por políticas de conteúdo; inconsistência entre site (depoimentos) e diretrizes de publicidade médica pode gerar denúncias de terceiros</td>
+            <td>Políticas Google Business · Res. CFM 2.336/2023</td>
+          </tr>
+          <tr>
+            <td>Reputacional</td>
+            <td>Censura pública no Diário Oficial do CRM; perda de credibilidade com pacientes, convênios e hospitais; impacto em credenciamentos; dano de imagem difícil de reverter enquanto o conteúdo permanecer online</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="penalty-note">
+      <strong>📋 Nota prática:</strong> Profissionais liberais (pessoa física com CRM) respondem primariamente ao PEP e às sanções do CRM-MG. A ANPD tem intensificado fiscalização do setor de saúde desde 2024. A correção preventiva do site (como no protótipo já desenvolvido em <code>dra-cynthia-netto.vercel.app</code>, sem depoimentos e com LGPD adequada) é significativamente mais econômica do que a defesa em processo ético ou sancionatório. Multas LGPD em consultórios individuais tendem a ser dosimetradas conforme porte e gravidade — porém a exposição de dados de pacientes em depoimentos públicos pode elevar o enquadramento.
+    </div>
+  </div>
+</div>
+
 <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:24px;">
   <div style="padding:14px 18px;background:var(--surface2);border-bottom:1px solid var(--border);font-weight:700;font-size:14px;">📊 Tabela Resumo</div>
   <div style="overflow-x:auto;">
@@ -539,6 +645,11 @@
         <tr><td>HTTPS</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
         <tr><td>Endereço e contatos</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
         <tr><td>Antes/depois / preços</td><td>✅ Conforme</td><td><span class="risk-pill risk-baixo">Baixo</span></td></tr>
+        <tr><td>Sensacionalismo (HPV, menopausa)</td><td>❌ Não Conforme</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
+        <tr><td>Google Meu Negócio nos depoimentos</td><td>❌ Crítico CFM</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
+        <tr><td>Cláusula reviews na política</td><td>❌ Não Conforme</td><td><span class="risk-pill risk-medio">Médio</span></td></tr>
+        <tr><td>Cookies granulares (ANPD)</td><td>⚠️ Atenção</td><td><span class="risk-pill risk-medio">Médio</span></td></tr>
+        <tr><td><strong>Exposição a penalidades</strong></td><td>🔴 PEP + ANPD + CDC</td><td><span class="risk-pill risk-alto">Alto</span></td></tr>
       </tbody>
     </table>
   </div>
@@ -590,7 +701,7 @@
 </div>
 
 <div class="disclaimer">
-  <strong>⚠️ Nota:</strong> Relatório orientativo baseado em análise remota de <strong>dracynthianetto.com.br</strong> (home, política de privacidade e termos de uso) em 25/06/2026. Classificação: médica/ginecologista (CFM + LGPD + CDC). Não substitui assessoria jurídica nem parecer do CRM/MG. Índice de conformidade: <strong>40%</strong> (8/20 itens) — Não Conforme, com 2 itens críticos.
+  <strong>⚠️ Nota:</strong> Relatório orientativo baseado em análise remota de <strong>dracynthianetto.com.br</strong> (home renderizada, modais de especialidades, política de privacidade e termos de uso via <code>?termos=...</code>) em 25/06/2026. Método: curl + inspeção browser. Classificação: médica/ginecologista (CFM + LGPD + CDC). Não substitui assessoria jurídica nem parecer do CRM/MG. Índice de conformidade: <strong>38%</strong> (8/21 itens avaliados) — <strong>Não Conforme</strong>, com 2 itens críticos ativos. Seção 5 descreve penalidades possíveis, não valores definitivos de multa.
 </div>
 
 <div class="footer">

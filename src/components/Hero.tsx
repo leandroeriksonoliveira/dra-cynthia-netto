@@ -27,8 +27,8 @@ const HeroScene3D = dynamic(
 
 export function Hero() {
   return (
-    <section id="inicio" className="mesh-gradient relative overflow-hidden pt-24 pb-16 lg:pt-32 lg:pb-24">
-      <div className="mx-auto grid max-w-6xl items-center gap-10 px-5 lg:grid-cols-2 lg:gap-16">
+    <section id="inicio" className="mesh-gradient relative overflow-hidden pt-20 pb-10 lg:pt-24 lg:pb-14">
+      <div className="mx-auto grid max-w-6xl items-center gap-8 px-5 lg:grid-cols-2 lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}

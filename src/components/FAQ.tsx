@@ -10,7 +10,7 @@ export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="bg-white py-16 lg:py-24">
+    <section id="faq" className="bg-white py-10 lg:py-14">
       <div className="mx-auto max-w-3xl px-5">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 text-sm font-semibold text-rose-dark">
@@ -20,7 +20,7 @@ export function FAQ() {
           <h2 className="mt-2 font-serif text-3xl font-bold text-ink sm:text-4xl">FAQ</h2>
         </div>
 
-        <div className="mt-10 space-y-3">
+        <div className="mt-8 space-y-3">
           {FAQ_ITEMS.map((item, i) => {
             const isOpen = openIndex === i;
             return (

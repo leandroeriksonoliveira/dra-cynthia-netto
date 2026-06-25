@@ -30,6 +30,12 @@ npm run dev
 
 Acesse [http://localhost:3000](http://localhost:3000).
 
+### Anatomia 3D (Sketchfab)
+
+Modelos 3D interativos via **Sketchfab** — embed gratuito, sem API key ou conta de desenvolvedor. Fonte: [AnatomyTOOL.org](https://anatomytool.org) (Catherine Vallance, Leiden University Medical Center, licença **CC BY**).
+
+Alternativas open source para referência: [Z-Anatomy](https://www.z-anatomy.com) (CC BY-SA), [OpenAnatomy](https://openanatomy.org).
+
 ## Deploy
 
 ```bash

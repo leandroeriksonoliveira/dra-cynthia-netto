@@ -21,9 +21,9 @@ import {
 
 export function Contact() {
   return (
-    <section id="contato" className="mesh-gradient py-16 lg:py-24">
+    <section id="contato" className="mesh-gradient py-10 lg:py-14">
       <div className="mx-auto max-w-6xl px-5">
-        <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+        <div className="grid gap-8 lg:grid-cols-2 lg:gap-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}

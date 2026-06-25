@@ -73,7 +73,7 @@ export function Specialties() {
   const [selected, setSelected] = useState<Specialty | null>(null);
 
   return (
-    <section id="especialidades" className="mesh-gradient py-16 lg:py-24">
+    <section id="especialidades" className="mesh-gradient py-10 lg:py-14">
       <div className="mx-auto max-w-6xl px-5">
         <div className="text-center">
           <span className="text-sm font-semibold text-rose-dark">Áreas de atuação</span>
@@ -81,12 +81,12 @@ export function Specialties() {
             Especialidades
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-ink-soft/80">
-            Conheça cada área com ilustrações do consultório, modelos 3D interativos (BioDigital
-            Human) e vídeos educativos de anatomia — clique para explorar.
+            Conheça cada área com ilustrações do consultório, modelos 3D interativos gratuitos
+            (Sketchfab / AnatomyTOOL) e vídeos educativos de anatomia — clique para explorar.
           </p>
         </div>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6">
+        <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-6">
           {SPECIALTIES.map((specialty, i) => (
             <SpecialtyCard
               key={specialty.id}
@@ -97,7 +97,7 @@ export function Specialties() {
           ))}
         </div>
 
-        <p className="mx-auto mt-10 max-w-3xl rounded-xl border border-ink/5 bg-white/60 p-4 text-center text-xs leading-relaxed text-ink-soft/70 backdrop-blur-sm">
+        <p className="mx-auto mt-8 max-w-3xl rounded-xl border border-ink/5 bg-white/60 p-4 text-center text-xs leading-relaxed text-ink-soft/70 backdrop-blur-sm">
           {CONTENT_DISCLAIMER}
         </p>
       </div>

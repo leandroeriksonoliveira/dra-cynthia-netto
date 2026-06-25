@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { X, Calendar, Box, Play, FileText } from "lucide-react";
 import { CONTENT_DISCLAIMER, WHATSAPP_URL, type Specialty } from "@/lib/site-config";
-import { BioDigitalViewer } from "@/components/BioDigitalViewer";
+import { Anatomy3DViewer } from "@/components/Anatomy3DViewer";
 import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { cn } from "@/lib/utils";
 
@@ -104,11 +104,11 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
           {tab === "anatomy" && (
             <>
               <p className="mb-4 text-sm text-ink-soft/80">
-                Explore a anatomia relacionada em 3D — gire, amplie e identifique estruturas. Modelo
-                interativo no padrão BioDigital Human.
+                Explore a anatomia relacionada em 3D — gire, amplie e identifique estruturas.
+                Modelo interativo educativo (Sketchfab · CC BY).
               </p>
-              <BioDigitalViewer
-                viewId={specialty.biodigitalViewId}
+              <Anatomy3DViewer
+                modelId={specialty.sketchfabModelId}
                 title={specialty.title}
                 active={tab === "anatomy"}
               />
