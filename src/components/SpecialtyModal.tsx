@@ -5,6 +5,7 @@ import Image from "next/image";
 import { X, Calendar, Box, Play, FileText } from "lucide-react";
 import { CONTENT_DISCLAIMER, WHATSAPP_URL, type Specialty } from "@/lib/site-config";
 import { BioDigitalViewer } from "@/components/BioDigitalViewer";
+import { YouTubeEmbed } from "@/components/YouTubeEmbed";
 import { cn } from "@/lib/utils";
 
 type Tab = "info" | "anatomy" | "video";
@@ -30,7 +31,7 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
   const tabs: { id: Tab; label: string; icon: typeof FileText }[] = [
     { id: "info", label: "Informações", icon: FileText },
     { id: "anatomy", label: "Anatomia 3D", icon: Box },
-    ...(specialty.videoUrl
+    ...(specialty.videoId
       ? [{ id: "video" as Tab, label: "Vídeo educativo", icon: Play }]
       : []),
   ];
@@ -106,29 +107,27 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
                 Explore a anatomia relacionada em 3D — gire, amplie e identifique estruturas. Modelo
                 interativo no padrão BioDigital Human.
               </p>
-              <BioDigitalViewer viewId={specialty.biodigitalViewId} title={specialty.title} />
+              <BioDigitalViewer
+                viewId={specialty.biodigitalViewId}
+                title={specialty.title}
+                active={tab === "anatomy"}
+              />
               <p className="mt-3 text-xs text-ink-soft/60">
                 Visualização educativa. Não substitui exame clínico ou diagnóstico médico.
               </p>
             </>
           )}
 
-          {tab === "video" && specialty.videoUrl && (
+          {tab === "video" && specialty.videoId && (
             <>
               <p className="mb-4 text-sm text-ink-soft/80">
                 Vídeo educativo sobre anatomia e condições relacionadas — conteúdo informativo de
                 referência.
               </p>
-              <div className="overflow-hidden rounded-xl border border-ink/10">
-                <iframe
-                  title={`Vídeo educativo — ${specialty.title}`}
-                  src={specialty.videoUrl}
-                  className="aspect-video w-full border-0"
-                  loading="lazy"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
+              <YouTubeEmbed
+                videoId={specialty.videoId}
+                title={`Vídeo educativo — ${specialty.title}`}
+              />
               <p className="mt-3 text-xs text-ink-soft/60">
                 Conteúdo de terceiros com finalidade educativa. Não constitui recomendação de
                 tratamento.

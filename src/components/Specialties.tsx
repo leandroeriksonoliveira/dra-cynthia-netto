@@ -46,7 +46,7 @@ function SpecialtyCard({
               <Box className="h-3 w-3" />
               3D
             </span>
-            {specialty.videoUrl && (
+            {specialty.videoId && (
               <span className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-[10px] font-bold text-slate shadow-sm backdrop-blur-sm">
                 <Play className="h-3 w-3" />
                 Vídeo
