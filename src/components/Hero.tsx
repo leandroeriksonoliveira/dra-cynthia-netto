@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import {
@@ -19,11 +18,6 @@ import {
   STAT_YEARS,
   WHATSAPP_URL,
 } from "@/lib/site-config";
-
-const HeroScene3D = dynamic(
-  () => import("@/components/HeroScene3D").then((m) => m.HeroScene3D),
-  { ssr: false, loading: () => <div className="h-full w-full animate-pulse rounded-3xl bg-rose-light/30" /> },
-);
 
 export function Hero() {
   return (
@@ -105,8 +99,24 @@ export function Hero() {
             <div className="absolute inset-0 bg-gradient-to-t from-ink/20 via-transparent to-transparent" />
           </div>
 
-          <div className="absolute -right-4 -bottom-4 hidden h-48 w-48 overflow-hidden rounded-2xl border-4 border-white shadow-xl lg:block">
-            <HeroScene3D />
+          <div className="absolute -right-4 -bottom-4 hidden max-w-[220px] rounded-2xl border border-white/90 bg-white/95 p-4 shadow-xl backdrop-blur-sm lg:block">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/images/logo.jpg"
+                alt=""
+                width={44}
+                height={44}
+                className="rounded-full object-cover ring-2 ring-rose-light"
+                aria-hidden
+              />
+              <div>
+                <p className="text-xs font-bold text-ink">MÉDICA</p>
+                <p className="text-[10px] font-semibold text-rose-dark">CRM/MG 29435</p>
+              </div>
+            </div>
+            <p className="mt-3 text-[11px] leading-relaxed text-ink-soft/85">
+              Ginecologia · Mastologia · Saúde íntima · Cirurgia videolaparoscópica
+            </p>
           </div>
 
           <div className="absolute -left-2 top-8 rounded-xl bg-white/90 px-4 py-3 shadow-lg backdrop-blur-sm">
