@@ -1,18 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Play, ArrowRight } from "lucide-react";
+import { Box, ArrowRight, Play } from "lucide-react";
 import { CONTENT_DISCLAIMER, SPECIALTIES, type Specialty } from "@/lib/site-config";
 import { SpecialtyModal } from "@/components/SpecialtyModal";
-import { cn } from "@/lib/utils";
-
-const SpecialtyScene3D = dynamic(
-  () => import("@/components/SpecialtyScene3D").then((m) => m.SpecialtyScene3D),
-  { ssr: false, loading: () => <div className="h-full w-full animate-pulse bg-rose-light/20" /> },
-);
 
 function SpecialtyCard({
   specialty,
@@ -23,8 +16,7 @@ function SpecialtyCard({
   index: number;
   onOpen: (s: Specialty) => void;
 }) {
-  const [flipped, setFlipped] = useState(false);
-  const variant = index % 2 === 0 ? "sphere" : "torus";
+  const [hovered, setHovered] = useState(false);
 
   return (
     <motion.div
@@ -32,68 +24,45 @@ function SpecialtyCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.05 }}
-      className="perspective-1000 group h-[320px] cursor-pointer sm:h-[340px]"
-      onMouseEnter={() => setFlipped(true)}
-      onMouseLeave={() => setFlipped(false)}
+      className="group cursor-pointer"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
       onClick={() => onOpen(specialty)}
     >
-      <div
-        className={cn(
-          "preserve-3d relative h-full w-full transition-transform duration-700",
-          flipped && "rotate-y-180",
-        )}
-        style={{ transformStyle: "preserve-3d", transform: flipped ? "rotateY(180deg)" : "rotateY(0deg)" }}
-      >
-        {/* Front */}
-        <div
-          className="backface-hidden absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-ink/5 bg-white shadow-lg transition group-hover:shadow-xl"
-          style={{ backfaceVisibility: "hidden" }}
-        >
-          <div className="relative h-36 overflow-hidden bg-gradient-to-br from-rose-light/50 to-white">
-            <div className="absolute inset-0 opacity-60">
-              <SpecialtyScene3D color={specialty.color3d} variant={variant as "sphere" | "torus"} />
-            </div>
-            <div className="absolute bottom-2 right-2 rounded-full bg-white/80 p-1.5 shadow-sm backdrop-blur-sm">
-              <Image
-                src={specialty.image}
-                alt=""
-                width={40}
-                height={40}
-                className="rounded-full object-cover"
-              />
-            </div>
-          </div>
-          <div className="flex flex-1 flex-col p-5">
-            <h3 className="font-serif text-lg font-bold text-ink">{specialty.title}</h3>
-            <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft/80">
-              {specialty.shortDescription}
-            </p>
-            <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-rose-dark">
-              Saiba mais <ArrowRight className="h-3 w-3" />
+      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-ink/5 bg-white shadow-lg transition hover:border-rose/25 hover:shadow-xl">
+        <div className="relative flex h-44 items-center justify-center overflow-hidden bg-gradient-to-br from-rose-light/30 to-cream p-4 sm:h-48">
+          <Image
+            src={specialty.image}
+            alt={specialty.title}
+            width={180}
+            height={180}
+            className="relative z-10 h-auto max-h-36 w-auto object-contain transition duration-500 group-hover:scale-105 sm:max-h-40"
+          />
+          <div
+            className={`absolute inset-0 bg-gradient-to-t from-white/80 via-transparent to-transparent transition-opacity duration-300 ${hovered ? "opacity-100" : "opacity-0"}`}
+          />
+          <div className="absolute top-3 right-3 flex gap-1.5">
+            <span className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-[10px] font-bold text-rose-dark shadow-sm backdrop-blur-sm">
+              <Box className="h-3 w-3" />
+              3D
             </span>
+            {specialty.videoUrl && (
+              <span className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-[10px] font-bold text-slate shadow-sm backdrop-blur-sm">
+                <Play className="h-3 w-3" />
+                Vídeo
+              </span>
+            )}
           </div>
         </div>
 
-        {/* Back */}
-        <div
-          className="absolute inset-0 flex flex-col overflow-hidden rounded-2xl border border-rose/20 bg-gradient-to-br from-rose-light/40 to-white p-5 shadow-lg"
-          style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
-        >
-          <div className="flex h-20 items-center justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white shadow-md">
-              <Play className="h-6 w-6 text-rose-dark" />
-            </div>
-          </div>
-          <h3 className="text-center font-serif text-lg font-bold text-ink">{specialty.title}</h3>
-          <p className="mt-3 flex-1 text-center text-sm leading-relaxed text-ink-soft/80">
-            Passe o mouse ou toque para ver detalhes, vídeo informativo e orientações.
+        <div className="flex flex-1 flex-col p-5">
+          <h3 className="font-serif text-lg font-bold text-ink">{specialty.title}</h3>
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-soft/80">
+            {specialty.shortDescription}
           </p>
-          <button
-            type="button"
-            className="mt-3 w-full rounded-full bg-rose-dark py-2.5 text-xs font-semibold text-white"
-          >
-            Ver detalhes
-          </button>
+          <span className="mt-4 inline-flex items-center gap-1 text-xs font-semibold text-rose-dark">
+            Anatomia 3D + detalhes <ArrowRight className="h-3 w-3" />
+          </span>
         </div>
       </div>
     </motion.div>
@@ -112,8 +81,8 @@ export function Specialties() {
             Especialidades
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-ink-soft/80">
-            Explore as áreas de atuação da Dra. Cynthia. Passe o mouse sobre os cards para
-            visualização 3D interativa e clique para mais informações.
+            Conheça cada área com ilustrações do consultório, modelos 3D interativos (BioDigital
+            Human) e vídeos educativos de anatomia — clique para explorar.
           </p>
         </div>
 

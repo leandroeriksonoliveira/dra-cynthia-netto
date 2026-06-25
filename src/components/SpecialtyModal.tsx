@@ -1,15 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { X, Calendar } from "lucide-react";
+import { X, Calendar, Box, Play, FileText } from "lucide-react";
 import { CONTENT_DISCLAIMER, WHATSAPP_URL, type Specialty } from "@/lib/site-config";
+import { BioDigitalViewer } from "@/components/BioDigitalViewer";
+import { cn } from "@/lib/utils";
 
-const SpecialtyScene3D = dynamic(
-  () => import("@/components/SpecialtyScene3D").then((m) => m.SpecialtyScene3D),
-  { ssr: false },
-);
+type Tab = "info" | "anatomy" | "video";
 
 type Props = {
   specialty: Specialty;
@@ -17,6 +15,8 @@ type Props = {
 };
 
 export function SpecialtyModal({ specialty, onClose }: Props) {
+  const [tab, setTab] = useState<Tab>("info");
+
   useEffect(() => {
     document.body.style.overflow = "hidden";
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
@@ -27,6 +27,14 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
     };
   }, [onClose]);
 
+  const tabs: { id: Tab; label: string; icon: typeof FileText }[] = [
+    { id: "info", label: "Informações", icon: FileText },
+    { id: "anatomy", label: "Anatomia 3D", icon: Box },
+    ...(specialty.videoUrl
+      ? [{ id: "video" as Tab, label: "Vídeo educativo", icon: Play }]
+      : []),
+  ];
+
   return (
     <div
       className="fixed inset-0 z-[70] flex items-end justify-center bg-ink/50 p-4 backdrop-blur-sm sm:items-center"
@@ -36,11 +44,18 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
       aria-labelledby="specialty-modal-title"
     >
       <div
-        className="max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
+        className="max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-2xl bg-white shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative h-48 overflow-hidden rounded-t-2xl bg-gradient-to-br from-rose-light to-white sm:h-56">
-          <SpecialtyScene3D color={specialty.color3d} variant="sphere" />
+        <div className="relative h-44 overflow-hidden bg-gradient-to-br from-rose-light to-white sm:h-52">
+          <Image
+            src={specialty.image}
+            alt={specialty.title}
+            fill
+            className="object-contain p-6"
+            sizes="768px"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
           <button
             type="button"
             onClick={onClose}
@@ -49,26 +64,77 @@ export function SpecialtyModal({ specialty, onClose }: Props) {
           >
             <X className="h-5 w-5 text-ink" />
           </button>
-          <div className="absolute bottom-4 left-4 flex items-center gap-3">
-            <Image
-              src={specialty.image}
-              alt=""
-              width={48}
-              height={48}
-              className="rounded-full border-2 border-white object-cover shadow-md"
-            />
-            <h2 id="specialty-modal-title" className="font-serif text-xl font-bold text-ink">
+          <div className="absolute bottom-4 left-5 right-5">
+            <h2 id="specialty-modal-title" className="font-serif text-xl font-bold text-ink sm:text-2xl">
               {specialty.title}
             </h2>
           </div>
         </div>
 
-        <div className="p-6 sm:p-8">
-          <p className="text-base leading-relaxed text-ink-soft/90">{specialty.fullDescription}</p>
+        <div className="flex gap-1 border-b border-ink/5 px-4 pt-2">
+          {tabs.map((t) => (
+            <button
+              key={t.id}
+              type="button"
+              onClick={() => setTab(t.id)}
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-t-lg px-3 py-2.5 text-xs font-semibold transition sm:text-sm",
+                tab === t.id
+                  ? "border-b-2 border-rose-dark text-rose-dark"
+                  : "text-ink-soft/70 hover:text-ink",
+              )}
+            >
+              <t.icon className="h-3.5 w-3.5" />
+              {t.label}
+            </button>
+          ))}
+        </div>
 
-          <div className="mt-6 rounded-xl border border-rose/15 bg-rose-light/20 p-4">
-            <p className="text-xs leading-relaxed text-ink-soft/70">{CONTENT_DISCLAIMER}</p>
-          </div>
+        <div className="p-6 sm:p-8">
+          {tab === "info" && (
+            <>
+              <p className="text-base leading-relaxed text-ink-soft/90">{specialty.fullDescription}</p>
+              <div className="mt-6 rounded-xl border border-rose/15 bg-rose-light/20 p-4">
+                <p className="text-xs leading-relaxed text-ink-soft/70">{CONTENT_DISCLAIMER}</p>
+              </div>
+            </>
+          )}
+
+          {tab === "anatomy" && (
+            <>
+              <p className="mb-4 text-sm text-ink-soft/80">
+                Explore a anatomia relacionada em 3D — gire, amplie e identifique estruturas. Modelo
+                interativo no padrão BioDigital Human.
+              </p>
+              <BioDigitalViewer viewId={specialty.biodigitalViewId} title={specialty.title} />
+              <p className="mt-3 text-xs text-ink-soft/60">
+                Visualização educativa. Não substitui exame clínico ou diagnóstico médico.
+              </p>
+            </>
+          )}
+
+          {tab === "video" && specialty.videoUrl && (
+            <>
+              <p className="mb-4 text-sm text-ink-soft/80">
+                Vídeo educativo sobre anatomia e condições relacionadas — conteúdo informativo de
+                referência.
+              </p>
+              <div className="overflow-hidden rounded-xl border border-ink/10">
+                <iframe
+                  title={`Vídeo educativo — ${specialty.title}`}
+                  src={specialty.videoUrl}
+                  className="aspect-video w-full border-0"
+                  loading="lazy"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+              <p className="mt-3 text-xs text-ink-soft/60">
+                Conteúdo de terceiros com finalidade educativa. Não constitui recomendação de
+                tratamento.
+              </p>
+            </>
+          )}
 
           <div className="mt-6 flex flex-wrap gap-3">
             <a
